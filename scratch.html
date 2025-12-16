@@ -14,7 +14,7 @@
         <span class="dot" aria-hidden="true"></span>
         <div>
           <div class="title-main">Scratch Page</div>
-          <div class="title-sub">Photography (from-scratch HTML + CSS)</div>
+          <div class="title-sub">Film Photography (from-scratch HTML + CSS)</div>
         </div>
       </div>
 
@@ -27,99 +27,305 @@
 
   <main class="wrap">
     <!-- DIV #1 -->
-    <section class="hero">
-      <div class="hero-left">
-        <h1>Why I Like Film Photography</h1>
-        <p>
-          Film slows me down. It forces intention: light, timing, framing, and the patience
-          to wait for something worth capturing.
-        </p>
+<section class="hero hero-centered">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <h1>Why Film Photography</h1>
+      <p>
+        Film photography slows me down in a way nothing else does. It forces intention—light, timing, framing—and then asks me to let go. 
+        I first picked up a film camera during my mission after finding one tucked away in a barn. I didn’t know much about it at the time, 
+        but something about the process immediately stuck with me, and that moment sparked a fascination that hasn’t faded.
+        <br><br>
+        I love film because it feels authentic. There are easier ways to take a “perfect” photo, but that’s never been the goal for me. 
+        I’m drawn to the imperfections—the grain, the grit, the small technical flaws that give an image character. 
+        There’s a nostalgic quality to it that feels honest and unforced.
+        <br><br>
+        One of my favorite parts of shooting film is the commitment. I take the photo and move on. There’s no checking the screen, 
+        no fixing it in the moment. Life keeps moving, and so do I. When I finally get the rolls developed, I often come across frames 
+        I don’t even remember taking, and those images end up meaning the most. They capture exactly what I was feeling in that 
+        moment—unplanned, imperfect, and real.
+      </p>
 
-        <!-- On-page anchor (requirement) -->
-        <div class="jump">
-          <a class="btn" href="#tableau">Jump to the Tableau Viz ↓</a>
-          <a class="btn ghost" href="#lists">Jump to the Lists ↓</a>
-        </div>
+      <div class="jump">
+        <a class="btn" href="#tableau">Jump to the Tableau Viz ↓</a>
+        <a class="btn ghost" href="#lists">Jump to the Workflow ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-carousel">
+    <div class="photo-card carousel" aria-label="Photo carousel">
+      <div class="carousel-frame">
+        <img id="carouselImg" src="images/filmphoto1.jpg" alt="Photography carousel image" />
       </div>
 
-      <div class="hero-right">
-        <!-- At least one image NOT from Bootstrap theme (requirement)
-             This is a stable, CC0 image hosted by Wikimedia.
-        -->
-        <figure class="photo-card">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Vintage_cameras_%28Unsplash%29.jpg"
-            alt="Vintage cameras on a shelf"
-            loading="lazy"
-          />
-          <figcaption>Vintage cameras (CC0). Replace this later with your own photos if you want.</figcaption>
+      <div class="carousel-controls">
+        <button class="cbtn" id="prevBtn" type="button" aria-label="Previous photo">‹</button>
 
-          <!-- Your photo placeholders (commented out) -->
-          <!--
-          <img src="images/your-film-photo-01.jpg" alt="Your photo #1">
-          <img src="images/your-film-photo-02.jpg" alt="Your photo #2">
-          -->
-        </figure>
+        <div class="carousel-meta">
+          <div class="carousel-title">Flim Highlights</div>
+          <div class="carousel-count"><span id="idx">1</span> / <span id="total">10</span></div>
+        </div>
+
+        <button class="cbtn" id="nextBtn" type="button" aria-label="Next photo">›</button>
+      </div>
+
+      <div class="carousel-dots" id="dots" aria-label="Carousel dots"></div>
+
+      <figcaption class="carousel-caption muted">
+        Use the arrows or dots to browse.
+      </figcaption>
+    </div>
+  </div>
+</section>
+
+<script>
+  const photos = [
+    "images/filmphoto1.jpg",
+    "images/filmphoto2.jpg",
+    "images/filmphoto3.jpg",
+    "images/filmphoto4.jpg",
+    "images/filmphoto5.jpg",
+    "images/filmphoto6.jpg",
+    "images/filmphoto7.jpg",
+    "images/filmphoto8.jpg",
+    "images/filmphoto9.jpg",
+    "images/filmphoto1.1.jpg",
+  ];
+
+  let current = 0;
+  const img = document.getElementById("carouselImg");
+  const idx = document.getElementById("idx");
+  const total = document.getElementById("total");
+  const dotsWrap = document.getElementById("dots");
+
+  total.textContent = photos.length;
+
+  function renderDots(){
+    dotsWrap.innerHTML = "";
+    photos.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "dotbtn" + (i === current ? " active" : "");
+      b.setAttribute("aria-label", `Go to photo ${i + 1}`);
+      b.addEventListener("click", () => { current = i; update(); });
+      dotsWrap.appendChild(b);
+    });
+  }
+
+  function update(){
+    img.src = photos[current];
+    idx.textContent = current + 1;
+    [...dotsWrap.children].forEach((d, i) => d.classList.toggle("active", i === current));
+  }
+
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    current = (current - 1 + photos.length) % photos.length;
+    update();
+  });
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    current = (current + 1) % photos.length;
+    update();
+  });
+
+  // Only react to arrow keys when the carousel is on screen
+  window.addEventListener("keydown", (e) => {
+    const rect = img.getBoundingClientRect();
+    const onScreen = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!onScreen) return;
+
+    if (e.key === "ArrowLeft") document.getElementById("prevBtn").click();
+    if (e.key === "ArrowRight") document.getElementById("nextBtn").click();
+  });
+
+  renderDots();
+  update();
+</script>
+
+
       </div>
     </section>
 
     <!-- DIV #2 -->
-    <section id="lists" class="section">
-      <h2>My Simple Workflow</h2>
-      <p class="muted">
-        This section includes an ordered list with an unordered list nested inside (rubric requirement).
-      </p>
+<section id="lists" class="section workflow">
+  <h2>My Workflow</h2>
+  <p class="muted">
+    A deliberate process that slows me down and keeps me honest—before, during, and long after the shutter clicks.
+  </p>
 
-      <!-- Ordered list with unordered list embedded inside (requirement) -->
-      <ol class="nice-list">
-        <li>
-          Plan the shot
-          <ul>
-            <li>What’s the story?</li>
-            <li>Where’s the light coming from?</li>
-            <li>What do I want the viewer to feel?</li>
-          </ul>
-        </li>
-        <li>Set exposure (meter + intentional over/under if needed)</li>
-        <li>Compose (lines, layers, subject separation)</li>
-        <li>Commit (take the frame, don’t spray)</li>
-        <li>Review later (notes: what worked, what didn’t)</li>
-      </ol>
-    </section>
+  <ol class="workflow-steps">
+    <li class="step">
+      <div class="step-head">
+        <span class="step-title">Plan</span>
+        <span class="step-meta">Story • Light • Mood</span>
+      </div>
+      <ul class="step-notes">
+        <li>What’s actually happening here, and why does it matter?</li>
+        <li>How is the light shaping the scene—and how will it change?</li>
+        <li>What emotion do I want this frame to carry?</li>
+      </ul>
+      <p class="step-text">
+        Before I ever lift the camera, I try to understand the moment in front of me. 
+        Film rewards patience, and this step sets the tone for everything that follows.
+      </p>
+    </li>
+
+    <li class="step">
+      <div class="step-head">
+        <span class="step-title">Expose</span>
+        <span class="step-meta">Meter • Intentional bias</span>
+      </div>
+      <p class="step-text">
+        I meter the scene, then make a conscious choice—protect the highlights, embrace the shadows,
+        or let the exposure lean imperfect. Film holds latitude, but it also remembers your decisions.
+      </p>
+    </li>
+
+    <li class="step">
+      <div class="step-head">
+        <span class="step-title">Compose</span>
+        <span class="step-meta">Lines • Layers • Subject separation</span>
+      </div>
+      <p class="step-text">
+        I simplify until only what matters remains. I pay attention to edges, depth, and visual flow,
+        letting negative space and layering do as much work as the subject itself.
+      </p>
+    </li>
+
+    <li class="step">
+      <div class="step-head">
+        <span class="step-title">Commit</span>
+        <span class="step-meta">One frame • No spray</span>
+      </div>
+      <p class="step-text">
+        When it feels right, I take the frame and move on. No checking, no correcting.
+        That commitment is part of the experience—it keeps me present instead of perfect.
+      </p>
+    </li>
+
+    <li class="step">
+      <div class="step-head">
+        <span class="step-title">Review</span>
+        <span class="step-meta">Notes • Patterns • Improvement</span>
+      </div>
+      <p class="step-text">
+        Days or weeks later, I revisit the images. Often the frames I barely remember taking
+        say the most. I look for patterns—what I’m drawn to, what I miss, and how I can see better next time.
+      </p>
+    </li>
+  </ol>
+</section>
+
 
     <!-- DIV #3 -->
     <section class="section">
-      <h2>Music I’ll Edit To</h2>
-      <p class="muted">Embedded YouTube video (rubric requirement).</p>
+      <h2>Editing Music</h2>
+      <p class="muted">Daft Punk - Veridis Quo</p>
 
       <div class="video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/xBJ4YkQq1i8?si=8Gfwdn4zmhH173at" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe 
+        width="560" 
+        height="315" 
+        src="https://www.youtube.com/embed/HhZaHf8RP6g?si=KV_HxUJ2AcYARoNh" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen>
+      </iframe>      
       </div>
-
-      <p class="tiny muted">
+      <!-- <p class="tiny muted">
         If this ever gets removed from YouTube, replace the ID in the embed URL.
-      </p>
+      </p> -->
     </section>
 
     <section id="tableau" class="section">
       <h2>Interactive Tableau Graph</h2>
       <p class="muted">
-        Live embedded Tableau viz (rubric requirement). If you want to swap it later,
-        replace the <code>src</code> with any Tableau Public “Share → Embed Code” link.
+        An interactive look at U.S. National Park visitation—where people go, when they go,
+        and how usage changes over time.
+        <br><br>
+        I chose this visualization because it highlights patterns in human behavior and our relationship with nature.
+        It’s fascinating to see how visitation trends reflect broader societal shifts, seasonal changes, and even economic factors.
+        <br><br>
       </p>
 
+
       <!-- Tableau Embedding API v3 -->
-      <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+<!-- Tableau: US National Parks Visitation Trends -->
+<div class="tableau-embed" id="parksViz" aria-label="US National Parks visitation trends visualization"></div>
 
-      <div class="tableau-wrap">
-        <tableau-viz
-          id="tableauViz"
-          src="https://public.tableau.com/views/Superstore_17067171530290/Overview?:showVizHome=no"
-          toolbar="bottom"
-          hide-tabs
-        ></tableau-viz>
-      </div>
+<script>
+  (function () {
+    const containerId = "parksViz";
 
+    if (!document.querySelector('script[src="https://public.tableau.com/javascripts/api/viz_v1.js"]')) {
+      const s = document.createElement("script");
+      s.src = "https://public.tableau.com/javascripts/api/viz_v1.js";
+      s.async = true;
+      s.onload = () => buildViz(containerId);
+      document.head.appendChild(s);
+    } else {
+      buildViz(containerId);
+    }
+
+    function buildViz(id) {
+      const container = document.getElementById(id);
+      if (!container) return;
+
+      container.innerHTML = "";
+
+      const placeholder = document.createElement("div");
+      placeholder.className = "tableauPlaceholder";
+      placeholder.style.position = "relative";
+      container.appendChild(placeholder);
+
+      const obj = document.createElement("object");
+      obj.className = "tableauViz";
+      obj.style.display = "none";
+
+      const addParam = (name, value) => {
+        const p = document.createElement("param");
+        p.name = name;
+        p.value = value;
+        obj.appendChild(p);
+      };
+
+      addParam("host_url", "https%3A%2F%2Fpublic.tableau.com%2F");
+      addParam("embed_code_version", "3");
+      addParam("site_root", "");
+      addParam("name", "USNationalParksVisitationTrends/Dashboard");
+      addParam("tabs", "no");
+      addParam("toolbar", "yes");
+      addParam("language", "en-US");
+
+      placeholder.appendChild(obj);
+
+      const setSize = () => {
+        const w = placeholder.clientWidth || 1100;
+        obj.style.width = "100%";
+        obj.style.height = Math.round(Math.min(900, w * 0.85)) + "px";
+      };
+
+      setSize();
+      window.addEventListener("resize", setSize);
+    }
+  })();
+</script>
+
+<noscript>
+  <p class="muted">
+    JavaScript is required to view this interactive dashboard.
+    <a href="https://public.tableau.com/views/USNationalParksVisitationTrends/Dashboard"
+       target="_blank" rel="noopener">
+      View on Tableau Public
+    </a>.
+  </p>
+</noscript>
+
+
+
+      
       <div class="backtop">
         <a href="#top">Back to top ↑</a>
       </div>

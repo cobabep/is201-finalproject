@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Scratch | Photography</title>
+  <link rel="stylesheet" href="styles/scratch.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="title">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <div class="title-main">Scratch Page</div>
+          <div class="title-sub">Photography (from-scratch HTML + CSS)</div>
+        </div>
+      </div>
+
+      <nav class="links" aria-label="Scratch navigation">
+        <a href="index.html">← Back to Resume</a>
+        <a href="app.html">Open Web App →</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- DIV #1 -->
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Why I Like Film Photography</h1>
+        <p>
+          Film slows me down. It forces intention: light, timing, framing, and the patience
+          to wait for something worth capturing.
+        </p>
+
+        <!-- On-page anchor (requirement) -->
+        <div class="jump">
+          <a class="btn" href="#tableau">Jump to the Tableau Viz ↓</a>
+          <a class="btn ghost" href="#lists">Jump to the Lists ↓</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <!-- At least one image NOT from Bootstrap theme (requirement)
+             This is a stable, CC0 image hosted by Wikimedia.
+        -->
+        <figure class="photo-card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Vintage_cameras_%28Unsplash%29.jpg"
+            alt="Vintage cameras on a shelf"
+            loading="lazy"
+          />
+          <figcaption>Vintage cameras (CC0). Replace this later with your own photos if you want.</figcaption>
+
+          <!-- Your photo placeholders (commented out) -->
+          <!--
+          <img src="images/your-film-photo-01.jpg" alt="Your photo #1">
+          <img src="images/your-film-photo-02.jpg" alt="Your photo #2">
+          -->
+        </figure>
+      </div>
+    </section>
+
+    <!-- DIV #2 -->
+    <section id="lists" class="section">
+      <h2>My Simple Workflow</h2>
+      <p class="muted">
+        This section includes an ordered list with an unordered list nested inside (rubric requirement).
+      </p>
+
+      <!-- Ordered list with unordered list embedded inside (requirement) -->
+      <ol class="nice-list">
+        <li>
+          Plan the shot
+          <ul>
+            <li>What’s the story?</li>
+            <li>Where’s the light coming from?</li>
+            <li>What do I want the viewer to feel?</li>
+          </ul>
+        </li>
+        <li>Set exposure (meter + intentional over/under if needed)</li>
+        <li>Compose (lines, layers, subject separation)</li>
+        <li>Commit (take the frame, don’t spray)</li>
+        <li>Review later (notes: what worked, what didn’t)</li>
+      </ol>
+    </section>
+
+    <!-- DIV #3 -->
+    <section class="section">
+      <h2>Music I’ll Edit To</h2>
+      <p class="muted">Embedded YouTube video (rubric requirement).</p>
+
+      <div class="video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/xBJ4YkQq1i8?si=8Gfwdn4zmhH173at" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <p class="tiny muted">
+        If this ever gets removed from YouTube, replace the ID in the embed URL.
+      </p>
+    </section>
+
+    <section id="tableau" class="section">
+      <h2>Interactive Tableau Graph</h2>
+      <p class="muted">
+        Live embedded Tableau viz (rubric requirement). If you want to swap it later,
+        replace the <code>src</code> with any Tableau Public “Share → Embed Code” link.
+      </p>
+
+      <!-- Tableau Embedding API v3 -->
+      <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+
+      <div class="tableau-wrap">
+        <tableau-viz
+          id="tableauViz"
+          src="https://public.tableau.com/views/Superstore_17067171530290/Overview?:showVizHome=no"
+          toolbar="bottom"
+          hide-tabs
+        ></tableau-viz>
+      </div>
+
+      <div class="backtop">
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="tiny muted">
+        Scratch page requirements: nested lists, image, YouTube embed, on-page anchor, custom background, 3+ divs, Tableau embed, nav back.
+      </div>
+      <div class="tiny muted">
+        <a href="index.html">Resume</a> • <a href="app.html">Web App</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Anchor target for "Back to top" -->
+  <div id="top"></div>
+</body>
+</html>

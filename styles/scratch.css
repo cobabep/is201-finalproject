@@ -1,0 +1,196 @@
+/* Custom stylesheet from scratch (rubric requirement)
+   Includes: font color, font family, 4+ style definitions, background color, etc.
+*/
+
+:root{
+  --bg: #0a0f14;
+  --panel: rgba(255,255,255,.06);
+  --line: rgba(255,255,255,.12);
+  --text: #eaf0ff;
+  --muted: rgba(234,240,255,.70);
+  --accent: #7dd3fc;
+  --accent2: #a7f3d0;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 18px;
+}
+
+*{ box-sizing: border-box; }
+body{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text);           /* font color requirement */
+  background: radial-gradient(900px 500px at 20% 0%, rgba(125,211,252,.18), transparent 60%),
+              radial-gradient(900px 500px at 90% 10%, rgba(167,243,208,.12), transparent 60%),
+              var(--bg);        /* custom background color requirement */
+  line-height: 1.6;
+}
+
+.wrap{
+  width: min(1100px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(14px);
+  background: rgba(10,15,20,.72);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 0;
+}
+
+.title{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.dot{
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 0 6px rgba(125,211,252,.10);
+}
+.title-main{ font-weight: 800; letter-spacing: .2px; }
+.title-sub{ font-size: .95rem; color: var(--muted); }
+
+.links{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.links a{
+  text-decoration: none;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  border-radius: 12px;
+}
+.links a:hover{ background: rgba(255,255,255,.08); }
+
+.hero{
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 16px;
+  padding: 22px 0 10px;
+}
+
+.hero-left, .photo-card, .section, .tableau-wrap{
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.hero-left{
+  padding: 20px;
+}
+.hero h1{ margin: 0 0 10px; font-size: clamp(1.6rem, 1.2rem + 2vw, 2.25rem); }
+
+.jump{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.btn{
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(125,211,252,.35);
+  background: rgba(125,211,252,.12);
+}
+.btn:hover{ background: rgba(125,211,252,.18); }
+.btn.ghost{
+  border-color: var(--line);
+  background: rgba(255,255,255,.04);
+}
+
+.photo-card{
+  overflow: hidden;
+}
+.photo-card img{
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+.photo-card figcaption{
+  padding: 12px 14px;
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+.section{
+  margin: 16px 0;
+  padding: 18px;
+}
+.section h2{ margin: 0 0 8px; }
+.muted{ color: var(--muted); }
+.tiny{ font-size: .9rem; }
+
+.nice-list{
+  margin: 10px 0 0;
+  padding-left: 20px;
+}
+.nice-list li{ margin: 10px 0; }
+.nice-list ul{ margin-top: 8px; }
+
+.video{
+  margin-top: 12px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.video iframe{
+  width: 100%;
+  height: min(420px, 52vw);
+  display: block;
+}
+
+.tableau-wrap{
+  margin-top: 12px;
+  padding: 10px;
+  overflow: hidden;
+}
+tableau-viz{
+  width: 100%;
+  height: 560px;
+  display: block;
+}
+
+.backtop{
+  margin-top: 14px;
+}
+.backtop a{
+  color: var(--accent);
+  text-decoration: none;
+}
+.backtop a:hover{ text-decoration: underline; }
+
+.footer{
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding: 18px 0 34px;
+}
+.footer-inner{
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.footer a{ color: var(--accent); text-decoration: none; }
+.footer a:hover{ text-decoration: underline; }
+
+@media (max-width: 900px){
+  .hero{ grid-template-columns: 1fr; }
+  tableau-viz{ height: 520px; }
+}

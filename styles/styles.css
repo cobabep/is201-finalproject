@@ -220,7 +220,7 @@ a{ color: inherit; }
 /* Resume headshot — centered + larger */
 .headshot{
   width: 320px;
-  height: 320px;
+  height: 400px;
   object-fit: cover;
   border-radius: 22px;
   display: block;
